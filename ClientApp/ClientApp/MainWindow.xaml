@@ -1,0 +1,83 @@
+﻿<Window x:Class="ClientApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientApp"
+        mc:Ignorable="d"
+        Title="APP-1" Height="600" Width="350" ResizeMode="NoResize">
+    <Grid Background="#FFF7F7F7">
+        <StackPanel Margin="10" VerticalAlignment="Top">
+            <!-- Bağlantı Ayarları -->
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0,0,0,10" Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock Text="BAĞLANTI AYARLARI" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="IP :" Width="60" VerticalAlignment="Center"/>
+                        <TextBox x:Name="IpTextBox" Width="180" Text="127.0.0.1"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="PORT :" Width="60" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PortTextBox" Width="180" Text="8070"/>
+                    </StackPanel>
+                    <Button x:Name="ConnectButton" Content="BAĞLAN" Background="Yellow" FontWeight="Bold" Click="ConnectButton_Click"/>
+                    <Button x:Name="DisconnectButton" Content="BAĞLANTIYI KES" Background="OrangeRed" FontWeight="Bold" Click="DisconnectButton_Click" Visibility="Collapsed" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+            <!-- Sunucu Bağlantı Durumu -->
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0,0,0,10" Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock Text="SUNUCU BAĞLANTI DURUMU" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ID / İSİM / .." Grid.Column="0" FontWeight="Bold"/>
+                        <TextBlock Text="CANLILIK" Grid.Column="1" FontWeight="Bold"/>
+                    </Grid>
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="SUNUCU-1" Grid.Column="0"/>
+                        <TextBlock x:Name="ConnectionStatusText" Text="AKTİF" Grid.Column="1" Background="LightGreen" FontWeight="Bold" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <!-- Yeni Koordinat İlet -->
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0,0,0,10" Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock Text="YENİ KOORDİNAT İLET" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="ENLEM :" Width="70" VerticalAlignment="Center"/>
+                        <TextBox x:Name="LatitudeTextBox" Width="180"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="BOYLAM :" Width="70" VerticalAlignment="Center"/>
+                        <TextBox x:Name="LongitudeTextBox" Width="180"/>
+                    </StackPanel>
+                    <Button x:Name="SelectOnMapButton" Content="HARİTADAN SEÇ" Background="White" BorderBrush="Black" BorderThickness="1" FontWeight="Bold" Margin="0,0,0,5" Click="SelectOnMapButton_Click"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="AÇIKLAMA :" Width="70" VerticalAlignment="Center"/>
+                        <TextBox x:Name="DescriptionTextBox" Width="180"/>
+                    </StackPanel>
+                    <Button x:Name="SendCoordinateButton" Content="GÖNDER" Background="Yellow" FontWeight="Bold" Click="SendCoordinateButton_Click"/>
+                </StackPanel>
+            </Border>
+            <!-- Video Stream Başlat -->
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0,0,0,10" Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock Text="VIDEO STREAM BAŞLAT" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="URL :" Width="60" VerticalAlignment="Center"/>
+                        <TextBox x:Name="VideoUrlTextBox" Width="180" Text="rtsp://127.0.0.1/"/>
+                    </StackPanel>
+                    <Button x:Name="SelectVideoButton" Content="DOSYA SEÇ" Background="White" BorderBrush="Black" BorderThickness="1" FontWeight="Bold" Margin="0,0,0,5" Click="SelectVideoButton_Click"/>
+                    <Button x:Name="StartVideoButton" Content="BAŞLAT" Background="Yellow" FontWeight="Bold" Click="StartVideoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

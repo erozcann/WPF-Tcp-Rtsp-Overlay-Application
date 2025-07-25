@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Koordinat Seç</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        html, body, #map { height: 100%; margin: 0; padding: 0; }
+        #btn {
+            position: absolute;
+            bottom: 10px; /* ← değiştirildi */
+            left: 10px;
+            z-index: 1000;
+            padding: 8px 16px;
+            background: #ffe600;
+            border: 1px solid #333;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">Kaydet</button>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([39.92, 32.85], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        var marker;
+        var selectedLat = null, selectedLng = null;
+        map.on('click', function(e) {
+            selectedLat = e.latlng.lat;
+            selectedLng = e.latlng.lng;
+            if(marker) map.removeLayer(marker);
+            marker = L.marker([selectedLat, selectedLng]).addTo(map);
+        });
+        document.getElementById('btn').onclick = function() {
+            if(selectedLat && selectedLng) {
+                if(window.chrome && window.chrome.webview) {
+                    window.chrome.webview.postMessage({ lat: selectedLat, lng: selectedLng });
+                }
+            }
+        };
+    </script>
+</body>
+</html> 

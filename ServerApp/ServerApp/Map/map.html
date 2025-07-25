@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Koordinat Haritası</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        html, body, #map { height: 100%; margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // URL parametrelerinden lat ve lng al
+        function getParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+        var lat = parseFloat(getParam('lat')) || 39.92;
+        var lng = parseFloat(getParam('lng')) || 32.85;
+        var desc = getParam('desc') || '';
+        var map = L.map('map').setView([lat, lng], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        var marker = L.marker([lat, lng]).addTo(map);
+        if(desc) marker.bindPopup(desc).openPopup();
+    </script>
+</body>
+</html> 
